@@ -1,0 +1,31 @@
+:root {
+  --primary: #222;
+  --secondary: #666;
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+}
+
+*, *::after, *::before {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-size: 16px;
+  line-height: 1.8;
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-style: normal;
+  font-family: "SFProDisplay", "Arial", sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

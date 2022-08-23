@@ -1,0 +1,143 @@
+.post-card {
+  display: flex;
+  flex-direction: column;
+
+  &:not(:last-child) {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--secondary);
+  }
+
+  // ---------------- HEADER ----------------
+  &__header {
+    display: flex;
+    align-items: end;
+    justify-content: start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__user-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  &__name-link {
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--secondary);
+    &:hover {
+      color: var(--primary);
+    }
+  }
+  &__time {
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  // ---------------- BODY ----------------
+  &__body {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  &__text {
+    display: none;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &__title {
+    font-size: 18px;
+    line-height: 1.5;
+    text-decoration: none;
+    color: var(--primary);
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__img-wrapper {
+    max-width: 160px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  // ---------------- FOOTER ----------------
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    //padding-right: 170px;
+  }
+
+  &__category {
+    font-size: 14px;
+    line-height: 1;
+    background-color: rgba(0,0,0,0.1);
+    padding: 6px 8px;
+    border-radius: 2px;
+    cursor: pointer;
+    user-select: none;
+    &:hover {
+      background-color: rgba(0,0,0,0.15);
+    }
+  }
+
+  &__actions-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  &__actions-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0);
+    user-select: none;
+    &:hover {
+      background-color: rgba(0,0,0,0.3);
+    }
+  }
+
+  &__actions-item-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+
+
+// ---------------------- TABLET STYLES -------------------------
+@media (min-width: 768px) {
+  .post-card {
+
+    // ---------------- HEADER ----------------
+    &__header {
+
+    }
+
+    // ---------------- BODY ----------------
+    &__body {
+
+    }
+
+    &__text {
+      display: block;
+    }
+
+    // -------------- FOOTER ----------------
+    &__footer {
+      padding-right: 170px;
+    }
+  }
+}
