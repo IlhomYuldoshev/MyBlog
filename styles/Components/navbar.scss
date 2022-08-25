@@ -46,6 +46,18 @@
       color: #000;
     }
   }
+
+  &__nav-item--profile {
+    position: relative;
+    user-select: none;
+  }
+
+  &__user-popup {
+    position: absolute;
+    z-index: 99;
+    bottom: calc(100% + 15px);
+    right: 15px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -91,6 +103,14 @@
     &__nav-img {
       width: 30px;
       height: 30px;
+    }
+
+    &__user-popup {
+      position: absolute;
+      z-index: 99;
+      bottom: 100%;
+      right: 0;
+      transform: translateX(100%);
     }
   }
 }

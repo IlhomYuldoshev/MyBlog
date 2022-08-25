@@ -1,0 +1,62 @@
+.user-popup {
+  background-color: var(--primary);
+  color: #fff;
+  padding: 10px;
+  position: absolute;
+
+  // POPUP TRIANGLE ICON
+  &:after {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg) skew(45deg);
+    background-color: var(--primary);
+    display: block;
+    content: "";
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 4;
+  }
+
+  &__list {
+    position: relative;
+    z-index: 4;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    min-width: 160px;
+  }
+
+  &__item {
+    text-align: start;
+  }
+
+  &__link {
+    display: block;
+    width: 100%;
+    color: #fff;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+@media (min-width: 768px) {
+  .user-popup {
+
+
+    // POPUP TRIANGLE ICON
+    &:after {
+      bottom: 0;
+      right: 100%;
+      transform: translateX(100%) rotate(90deg) skew(45deg);
+    }
+  }
+}

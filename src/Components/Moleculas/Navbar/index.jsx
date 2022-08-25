@@ -1,16 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import MyNavLink from "../../Atoms/MyNavLink";
-import Router from "next/router";
+import Router, {useRouter} from "next/router";
 import {useContextSelector} from "use-context-selector";
 import {ModalContext} from "../../../Context/ModalContext";
 import ModalTypes from "../../../Constants/ModalTypes";
 import {HomeSvg, ProfileSvg, Saved, WriteSvg} from "../../../Svgs";
 import AuthContext from "../../../Context/AuthContext";
+import UserPopup from "./UserPopup";
 
 const Navbar = () => {
   const router = Router;
   const mDispatch = useContextSelector(ModalContext, v => v.actions.dispatch)
   const isAuth = useContextSelector(AuthContext, v => v.state.isAuth);
+  const [isVisiblePopup, setIsVisiblePopup] = useState(false);
+  const {pathname} = useRouter();
+
+  // TODO norm kod yozish kerak
+  const test = pathname === "/profile";
+
+  const handleUserPopup = () => {
+    setIsVisiblePopup(p => !p);
+  }
 
   const openModal = () => {
     mDispatch({type: ModalTypes.LOGIN_FORM});
@@ -49,9 +59,17 @@ const Navbar = () => {
           {
             isAuth
               ? (
-                <MyNavLink to="/profile" className="site-nav__nav-link">
-                  <ProfileSvg className={"site-nav__nav-img"}/>
-                </MyNavLink>
+                <div className={`site-nav__nav-link ${test && "activeNavLink"}`}>
+                  <div onClick={handleUserPopup}>
+                    <ProfileSvg className={"site-nav__nav-img"} />
+                  </div>
+                  {isVisiblePopup && (
+                    <UserPopup
+                      setIsVisiblePopup={setIsVisiblePopup}
+                      className="site-nav__user-popup"
+                    />
+                  )}
+                </div>
               )
               : (
                 <div onClick={openModal} className="site-nav__nav-link">

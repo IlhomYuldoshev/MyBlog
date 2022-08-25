@@ -8,7 +8,6 @@ const AuthActions = {
     return async (dispatch) => {
       try {
         const response = await AuthProvider.login(email, password);
-        console.log(1111,response);
         localStorage.setItem("token", response.data.accessToken);
 
         dispatch({type: AuthTypes.LOGIN, payload: response.data?.user});
@@ -39,7 +38,6 @@ const AuthActions = {
         localStorage.removeItem("token");
         dispatch({type: AuthTypes.LOGOUT});
       } catch (err) {
-        // @ts-ignore
         console.log(err?.response?.data?.message);
       }
     }
