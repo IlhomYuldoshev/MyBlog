@@ -1,10 +1,21 @@
 import React from 'react';
-import UserProfile from "../../src/Components/Moleculas/UserProfile";
+import MyLink from "../../src/Components/Atoms/MyLink";
 
-const UserProfileHomePage = () => {
+// TODO
+const UserProfileHomePage = ({userid}) => {
   return (
-    <UserProfile/>
+    <div style={{padding: 30}}>
+      <h2>Settings page</h2>
+      <h3>Userid: {userid}</h3>
+      <MyLink to="/">Home</MyLink>
+    </div>
   );
 };
 
 export default UserProfileHomePage;
+
+
+export function getServerSideProps(props) {
+  const {userid} = props.params
+  return {props: {userid}}
+}
