@@ -51,6 +51,20 @@ const RegistrationForm = () => {
           />
         </label>
 
+        {/* ----------------- INPUT NAME ------------------ */}
+        <label className="login-form__label">
+          <span>Name</span>
+          {errors.name && <span className="err-span">{errors.email.message}</span>}
+          <input
+            className="login-form__input"
+            type="text"
+            {...register("name", {
+              required: "This field is required!"
+            })}
+            placeholder="Enter Name"
+          />
+        </label>
+
         {/* ----------------- INPUT PASSWORD ------------------ */}
         <label className="login-form__label">
           <span>Password</span>

@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
 import Button from "../../../Atoms/Button";
-import MyLink from "../../../Atoms/MyLink";
 import {useContextSelector} from "use-context-selector";
 import {ModalContext} from "../../../../Context/ModalContext";
 import ModalTypes from "../../../../Constants/ModalTypes";
+import AuthContext from "../../../../Context/AuthContext";
+import AuthActions from "../../../../Context/AuthContext/AuthActions";
 
 const LoginForm = () => {
   const mDispatch = useContextSelector(ModalContext, v => v.actions.dispatch)
+  const authDispatch = useContextSelector(AuthContext, v => v.dispatch);
   const {register, handleSubmit, formState: {errors}, setValue} = useForm();
   const [passwordType, setPasswordType] = useState(true);
 
@@ -20,7 +22,7 @@ const LoginForm = () => {
   }
 
   const onSubmit = (values) => {
-    console.log(values);
+    authDispatch(AuthActions.login(values.email, values.password));
   }
 
   return (
@@ -57,7 +59,7 @@ const LoginForm = () => {
         </label>
 
         <div className="login-form__submit-btn-wrapper">
-          <span onClick={goRegistrationHandler}>Go To Registration</span>
+          <span onClick={goRegistrationHandler}>Create An Account</span>
           <Button className="login-form__submit-btn">
             Login
           </Button>

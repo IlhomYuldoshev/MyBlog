@@ -5,11 +5,12 @@ import {useContextSelector} from "use-context-selector";
 import {ModalContext} from "../../../Context/ModalContext";
 import ModalTypes from "../../../Constants/ModalTypes";
 import {HomeSvg, ProfileSvg, Saved, WriteSvg} from "../../../Svgs";
+import AuthContext from "../../../Context/AuthContext";
 
 const Navbar = () => {
   const router = Router;
   const mDispatch = useContextSelector(ModalContext, v => v.actions.dispatch)
-  const isAuth = false;
+  const isAuth = useContextSelector(AuthContext, v => v.state.isAuth);
 
   const openModal = () => {
     mDispatch({type: ModalTypes.LOGIN_FORM});

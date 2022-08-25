@@ -1,0 +1,74 @@
+.base-input {
+  width: 100%;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 500;
+  font-family: "SFProDisplay", "Arial", sans-serif;
+  background-color: #fff;
+  color: var(--primary);
+
+  padding: 8px 16px;
+  outline: 0;
+  border: 1px solid #666;
+  border-radius: 5px;
+
+  &--search {
+    position: relative;
+
+    &:focus {
+      box-shadow: 0 0 10px 1px rgba(136, 136, 136, 0.2);
+    }
+  }
+}
+
+.search-input-wrapper {
+  position: relative;
+
+  &__clear-input {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    &:hover {
+      &:before, &:after {
+        background-color: var(--primary);
+      }
+    }
+    &:before, &:after {
+      display: block;
+      position: absolute;
+      left: 0;
+      content: "";
+      width: 100%;
+      height: 2px;
+      border-radius: 10px;
+      background-color: var(--secondary);
+    }
+    &:before {
+      top: 1px;
+      transform-origin: left bottom;
+      transform: rotate(45deg);
+    }
+    &:after {
+      bottom: 1px;
+      transform-origin: left top;
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+
+
+// --------- INPUT type search X buttonini yo'qotish uchun ----------
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration { display: none; }

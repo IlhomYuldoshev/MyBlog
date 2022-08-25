@@ -1,0 +1,9 @@
+.follow-btn {
+  font-weight: 400;
+  letter-spacing: 1px;
+
+  &--active {
+    background-color: transparent;
+    color: var(--primary);
+  }
+}

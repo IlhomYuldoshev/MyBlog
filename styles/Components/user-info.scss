@@ -1,0 +1,31 @@
+.user-info {
+  display: flex;
+  flex-direction: column;
+
+  &__avatar {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+  }
+
+  &__name {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--primary);
+  }
+
+  &__followers {
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: var(--textColor);
+  }
+
+  &__extra-info {
+    font-size: 15px;
+    line-height: 1.5;
+    margin-top: 0;
+    color: var(--textColor);
+  }
+}
