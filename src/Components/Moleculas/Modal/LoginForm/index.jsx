@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
 import Button from "../../../Atoms/Button";
 import {useContextSelector} from "use-context-selector";
@@ -10,6 +10,7 @@ import AuthActions from "../../../../Context/AuthContext/AuthActions";
 const LoginForm = () => {
   const mDispatch = useContextSelector(ModalContext, v => v.actions.dispatch)
   const authDispatch = useContextSelector(AuthContext, v => v.dispatch);
+  const isAuth = useContextSelector(AuthContext, v => v.state.isAuth);
   const {register, handleSubmit, formState: {errors}, setValue} = useForm();
   const [passwordType, setPasswordType] = useState(true);
 
@@ -24,6 +25,12 @@ const LoginForm = () => {
   const onSubmit = (values) => {
     authDispatch(AuthActions.login(values.email, values.password));
   }
+
+  useEffect(() => {
+    if(isAuth) {
+      mDispatch({type: "CLOSE"})
+    }
+  }, [isAuth])
 
   return (
     <div className="login-form">

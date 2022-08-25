@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
 import Button from "../../../Atoms/Button";
 import ModalTypes from "../../../../Constants/ModalTypes";
 import {useContextSelector} from "use-context-selector";
 import {ModalContext} from "../../../../Context/ModalContext";
+import AuthContext from "../../../../Context/AuthContext";
 
 const RegistrationForm = () => {
   const mDispatch = useContextSelector(ModalContext, v => v.actions.dispatch)
+  const isAuth = useContextSelector(AuthContext, v => v.state.isAuth);
   const {register, handleSubmit, formState: {errors}, setValue, watch} = useForm();
   const [passwordType, setPasswordType] = useState(true);
   // const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,7 +22,7 @@ const RegistrationForm = () => {
   const handlePasswordType = () => {
     setPasswordType(p => !p);
   }
-  console.log(errors)
+
   // const confirmPasswordHandler = (e) => {
   //   setConfirmPassword(e.target.value);
   //   const isSame = password === confirmPassword;
@@ -30,6 +32,12 @@ const RegistrationForm = () => {
   const onSubmit = (values) => {
     console.log(values);
   }
+
+  useEffect(() => {
+    if(isAuth) {
+      mDispatch({type: "CLOSE"})
+    }
+  }, [isAuth])
 
   return (
     <div className="login-form">

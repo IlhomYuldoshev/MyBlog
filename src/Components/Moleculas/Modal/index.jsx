@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Modal from 'react-modal';
 import {useContextSelector} from "use-context-selector";
 import {ModalContext} from "../../../Context/ModalContext";
@@ -6,6 +6,7 @@ import LoginForm from "./LoginForm";
 import Button from "../../Atoms/Button";
 import RegistrationForm from "./RegistrationForm";
 import ModalType from "../../../Constants/ModalTypes";
+import AuthContext from "../../../Context/AuthContext";
 
 Modal.setAppElement('#__next')
 
@@ -29,7 +30,7 @@ const MyModal = () => {
     }
   }
 
-  const closeModal = () => mDispatch({type: "CLOSE"})
+  const closeModal = () => mDispatch({type: "CLOSE"});
 
   return (
     <Modal
