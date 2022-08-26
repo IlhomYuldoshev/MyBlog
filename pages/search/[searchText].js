@@ -1,19 +1,31 @@
 import React from 'react';
-import MyLink from "../../src/Components/Atoms/MyLink";
+import axios from "axios";
+import SearchResultPage from "../../src/Pages/SearchResultPage";
 
-const SearchResultsPage = () => {
+const SearchResultsPage = ({searchText, searchResults}) => {
+  console.log("searchResults", searchResults);
   return (
-    <div>
-      <MyLink to="/">
-        Home
-      </MyLink>
-    </div>
+    <SearchResultPage searchResults={searchResults} searchText={searchText}/>
   );
 };
 
 export default SearchResultsPage;
 
-export function getServerSideProps(props) {
+
+export async function getServerSideProps(props) {
   const {searchText} = props.params
-  return {props: {searchText}}
+
+  const {data: posts} = await axios.get("https://jsonplaceholder.typicode.com/posts");
+  const {data: accounts} = await axios.get("https://jsonplaceholder.typicode.com/users");
+
+  return {
+    props:
+      {
+        searchResults: {
+          posts,
+          accounts
+        },
+        searchText
+      }
+  }
 }

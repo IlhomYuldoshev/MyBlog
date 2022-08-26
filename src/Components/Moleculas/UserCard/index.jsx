@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import FollowBtn from "../../Atoms/FollowBtn";
 import MyLink from "../../Atoms/MyLink";
 
 const UserCard = () => {
+  const [random, setRandom] = useState(Math.floor(Math.random() * 50));
+
   return (
     <div className="user-card">
       <div className="user-card__img-wrapper">
-        <img src="/react-logo.svg" alt=""/>
+        <img
+          src={`https://picsum.photos/200/200/?random=${random}`}
+          alt=""
+        />
       </div>
       <div className="user-card__text-wrapper">
         <MyLink to="#userProfile" className="user-card__name">
