@@ -30,10 +30,9 @@
   }
 
   &__right-sidebar {
-    display: none;
-    max-width: 300px;
+    width: 100%;
     flex-shrink: 0;
-    padding: 30px;
+    margin-bottom: 70px;
   }
 
   &__center {
@@ -44,7 +43,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .main-layout {
 
     &__container {
@@ -74,6 +73,7 @@
       flex-shrink: 0;
       padding: 30px;
       border-left: 1px solid rgba(0, 0, 0, 0.5);
+      margin-bottom: 0;
 
       .right-sidebar__inner {
         //position: sticky;
@@ -94,11 +94,11 @@
   }
 }
 
-@media (min-width: 992px) {
-  .main-layout {
-
-    &__right-sidebar {
-      display: block;
-    }
-  }
-}
+//@media (min-width: 992px) {
+//  .main-layout {
+//
+//    &__right-sidebar {
+//      display: block;
+//    }
+//  }
+//}
