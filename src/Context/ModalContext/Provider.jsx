@@ -43,6 +43,13 @@ function modalReducer (state, action) {
         modalType: ModalTypes.REGISTRATION_FORM
       }
     }
+    case ModalTypes.SEARCH: {
+      return {
+        ...state,
+        isOpen: true,
+        modalType: ModalTypes.SEARCH
+      }
+    }
     case "CLOSE": {
       return {
         ...state,

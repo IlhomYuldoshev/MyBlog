@@ -10,7 +10,9 @@ const UserPopup = ({className, setIsVisiblePopup}) => {
   const authDispatch = useContextSelector(AuthContext, v => v.dispatch);
 
   const handleLogout = () => {
-    authDispatch(AuthActions.logout());
+    if(window.confirm("Are you really want to logout?")) {
+      authDispatch(AuthActions.logout());
+    }
   }
 
   useClickOutside(popupRef, () => {

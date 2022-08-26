@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Modal from 'react-modal';
 import {useContextSelector} from "use-context-selector";
 import {ModalContext} from "../../../Context/ModalContext";
@@ -6,9 +6,9 @@ import LoginForm from "./LoginForm";
 import Button from "../../Atoms/Button";
 import RegistrationForm from "./RegistrationForm";
 import ModalType from "../../../Constants/ModalTypes";
-import AuthContext from "../../../Context/AuthContext";
+import SearchForm from "./SearchForm";
 
-Modal.setAppElement('#__next')
+Modal.setAppElement('#__next');
 
 const MyModal = () => {
   let Component;
@@ -23,6 +23,10 @@ const MyModal = () => {
     }
     case ModalType.REGISTRATION_FORM: {
       Component = RegistrationForm;
+      break;
+    }
+    case ModalType.SEARCH: {
+      Component = SearchForm;
       break;
     }
     default: {

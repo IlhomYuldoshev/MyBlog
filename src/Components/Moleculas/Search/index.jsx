@@ -1,7 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {SearchSvg} from "../../../Svgs";
 
-const SearchInput = () => {
-  const [searchValue, setSearchValue] = useState("");
+const SearchInput = ({searchValue, setSearchValue, onSubmit}) => {
+  const onSubmitHandle = (e) => {
+    e.preventDefault();
+    onSubmit();
+  }
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
@@ -12,7 +16,7 @@ const SearchInput = () => {
   }
 
   return (
-    <div className="search-input-wrapper">
+    <form onSubmit={onSubmitHandle} className="search-input-wrapper-form">
       <input
         className="base-input base-input--search"
         value={searchValue}
@@ -22,13 +26,19 @@ const SearchInput = () => {
       />
       {
         searchValue && (
-          <div
-            onClick={handleClearSearch}
-            className="search-input-wrapper__clear-input"
-          />
+          <>
+            <SearchSvg
+              onClick={onSubmitHandle}
+              className="search-input-wrapper-form__search-svg"
+            />
+            <div
+              onClick={handleClearSearch}
+              className="search-input-wrapper-form__clear-input"
+            />
+          </>
         )
       }
-    </div>
+    </form>
   );
 };
 
