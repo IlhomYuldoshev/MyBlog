@@ -4,7 +4,7 @@ import Sidebar from "../../Components/Moleculas/Sidebar";
 import Navbar from "../../Components/Moleculas/Navbar";
 import UserProfile from "../../Components/Moleculas/UserProfile";
 
-const ProfilePageMeta = {title: "Profile Page", description: "Profile page desc"}
+const ProfilePageMeta = {title: "Profile Page", description: "Profile page desc"};
 
 const ProfilePage = () => {
   return (

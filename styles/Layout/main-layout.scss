@@ -33,6 +33,7 @@
     width: 100%;
     flex-shrink: 0;
     margin-bottom: 70px;
+    display: none;
   }
 
   &__center {
@@ -74,6 +75,7 @@
       padding: 30px;
       border-left: 1px solid rgba(0, 0, 0, 0.5);
       margin-bottom: 0;
+      display: block;
 
       .right-sidebar__inner {
         //position: sticky;

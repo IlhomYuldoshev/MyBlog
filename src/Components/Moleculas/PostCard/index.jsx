@@ -29,7 +29,7 @@ const PostCard = () => {
       {/* -------------- BODY -------------- */}
       <div className="post-card__body">
         <div className="post-card__text-content">
-          <MyLink to="/" className="post-card__title">
+          <MyLink to="/post/random222" className="post-card__title">
             You don't know Javascript yet.
           </MyLink>
           <p className="post-card__text">

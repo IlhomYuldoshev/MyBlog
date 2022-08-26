@@ -16,6 +16,6 @@ export default UserProfileHomePage;
 
 
 export function getServerSideProps(props) {
-  const {userid} = props.params
+  const {userid} = props.params;
   return {props: {userid}}
 }

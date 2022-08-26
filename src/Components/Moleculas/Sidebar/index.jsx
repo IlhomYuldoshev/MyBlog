@@ -7,12 +7,8 @@ import ModalTypes from "../../../Constants/ModalTypes";
 import AuthContext from "../../../Context/AuthContext";
 import UserInfo from "../UserInfo";
 import {useRouter} from "next/router";
-import GlobalContext from "../../../Context/GlobalContext";
 
-// TODO- telefonda faqat user yoki post pageda user haqida malumot chiqadi
-//  yani sidebar ko'rinadi
-const Sidebar = ({isPostPage}) => {
-  const {isLaptop} = useContextSelector(GlobalContext, v => v.state.device);
+const Sidebar = () => {
   const mDispatch = useContextSelector(ModalContext, v => v.actions.dispatch);
   const isAuth = useContextSelector(AuthContext, v => v.state.isAuth);
   const [searchValue, setSearchValue] = useState("");
@@ -31,20 +27,14 @@ const Sidebar = ({isPostPage}) => {
   }
 
   return (
-    <div className={`sidebar ${isPostPage ? "sidebar--visible" : ""}`}>
-      {
-        isLaptop && (
-          <>
-            <SearchInput
-              onSubmit={onSubmitSearch}
-              searchValue={searchValue}
-              setSearchValue={setSearchValue}
-            />
-            <br/>
-            <br/>
-          </>
-        )
-      }
+    <div className={`sidebar`}>
+      <SearchInput
+        onSubmit={onSubmitSearch}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
+      <br/>
+      <br/>
       {
         isAuth
           ? <UserInfo/>
