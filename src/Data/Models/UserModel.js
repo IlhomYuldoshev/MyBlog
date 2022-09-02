@@ -1,6 +1,14 @@
 export const UserModel = {
+  user_name: String,
+  additional_info: String,
   email: String,
-  id: Number,
   isActivated: Boolean,
-  accessToken: String
+
+  // avatarUrl
+
+  bookmarkedPosts: ["Post"],
+  followedUsers: ["User"],
+
+  createdDate: Date,
+  updatedDate: Date
 }
