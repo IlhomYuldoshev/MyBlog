@@ -1,0 +1,41 @@
+.post-builder {
+
+}
+
+.post-builder__toolbar {
+
+}
+
+.post-build-item {
+
+
+  &__textarea {
+    border-radius: 0;
+    outline: 0;
+    border: 0;
+    font-size: 16px;
+    font-weight: 500;
+    resize: vertical;
+    min-height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid var(--secondary);
+  }
+  &__img-input {
+
+  }
+
+  &__title {
+    border-radius: 0;
+    font-weight: 700;
+    font-size: 28px;
+    outline: 0;
+    border: 0;
+    border-bottom: 1px solid var(--secondary);
+  }
+
+  &__hr {
+    height: 2px;
+    border: 0;
+    background-color: red;
+  }
+}
