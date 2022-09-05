@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {createReactElement} from "../../index";
+import {DeleteSvg, DragSvg} from "../../../../../Svgs";
 
 export const componentMappings = {
   Textarea: {
@@ -8,7 +9,8 @@ export const componentMappings = {
       className: "base-input post-build-item__textarea",
       type: "text"
     },
-    children: null
+    children: null,
+    renderElement: "p",
   },
   Image: {
     type: "input",
@@ -20,7 +22,7 @@ export const componentMappings = {
     // TODO - qo'shimcha backendga valuesini yuboramiz
     //  keyin get qilganda shu malumot objni render qilamiz
     //  render element haqiqiy korinishi productionda
-    renderElement: "p",
+    renderElement: "img",
   },
   Line: {
     type: "hr",
@@ -40,12 +42,84 @@ export const componentMappings = {
   }
 }
 
-const WriteItem = ({jsxObj}) => {
+const WriteItem = (
+  {
+    jsxObj,
+    removeItem,
+    currentDrag,
+    setCurrentDrag,
+    changeOrder,
+    register
+  }
+) => {
   const Component = createReactElement(jsxObj);
+  const [isOver, setIsOver] = useState(false);
+  const dragClassName = currentDrag && (currentDrag.id === jsxObj.id ? "post-build-item--dragging" : "post-build-item--dropping")
+
+  const onDragStart = () => {
+    setCurrentDrag(jsxObj);
+  }
+
+  const onDragEnd = () => {
+    setCurrentDrag(null);
+  }
+
+  function onDragLeave() {
+    setIsOver(false);
+  }
+
+  function onDragOver(e) {
+    e.preventDefault();
+    setIsOver(true);
+  }
+
+  function onDrop(e) {
+    e.preventDefault();
+    setIsOver(false);
+
+    if (currentDrag.id !== jsxObj.id) {
+      changeOrder(currentDrag.id, jsxObj.id);
+    }
+  }
 
   return (
-    <div className="post-build-item">
-      {Component}
+    <div
+      className={`post-build-item ${dragClassName}`}
+    >
+      <div className="post-build-item__component-wrapper">
+        {Component}
+      </div>
+      <div className="post-build-item__actions-wrapper">
+        <div
+          onDragStart={(e) => onDragStart(e)}
+          onDragLeave={(e) => onDragLeave(e)}
+          onDragEnd={onDragEnd}
+          onDragOver={(e) => onDragOver(e)}
+          draggable={true}
+        >
+          <DragSvg
+            className="post-build-item__drag-svg"
+          />
+        </div>
+        <DeleteSvg
+          onClick={() => removeItem(jsxObj.id)}
+          className="post-build-item__delete-svg"
+        />
+      </div>
+
+
+      {!!currentDrag && (
+        (currentDrag.id !== jsxObj.id) && <div
+          onDragStart={(e) => onDragStart(e)}
+          onDragLeave={(e) => onDragLeave(e)}
+          onDragEnd={onDragEnd}
+          onDragOver={(e) => onDragOver(e)}
+          onDrop={(e) => onDrop(e)}
+          draggable={true}
+          className="post-build-item__drop-box"
+          style={{backgroundColor: isOver ? "rgba(0,0,0,0.1)" : ""}}
+        />
+      )}
     </div>
   );
 };

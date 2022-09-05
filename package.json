@@ -18,7 +18,8 @@
     "react-hook-form": "^7.34.2",
     "react-modal": "^3.15.1",
     "sass": "^1.54.5",
-    "use-context-selector": "^1.4.1"
+    "use-context-selector": "^1.4.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "eslint": "8.22.0",
