@@ -2,23 +2,20 @@ import React from 'react';
 import {componentMappings} from "../Item";
 import {v4} from "uuid";
 
-const WriteToolbar = ({addItem, register}) => {
+const WriteToolbar = ({addItem, formId}) => {
 
   const addItemHandler = (key) => {
     const id = v4();
-    const props = key === "Line" ? {
-        ...componentMappings[key].props, ...register(
-          id.toString(),
-          {
-            required: true
-          }
-        )
-      } : componentMappings[key].props
+    const props = key !== "Line" ? {
+      ...componentMappings[key].props,
+      name: id,
+      form: formId
+    } : componentMappings[key].props
 
     addItem({
       ...componentMappings[key],
-      id,
-      props
+      props,
+      id
     })
   }
 

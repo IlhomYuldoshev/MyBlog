@@ -1,13 +1,17 @@
 import React, {useState} from 'react';
-import {createReactElement} from "../../index";
 import {DeleteSvg, DragSvg} from "../../../../../Svgs";
+import TextInput from "./TextInput";
+import Line from "./Line";
+import Image from "./Image";
 
+// TODO - qo'shimcha backendga valuesini yuboramiz
+//  keyin get qilganda shu malumot objni render qilamiz
+//  render element haqiqiy korinishi productionda
 export const componentMappings = {
   Textarea: {
     type: "textarea",
     props: {
       className: "base-input post-build-item__textarea",
-      type: "text"
     },
     children: null,
     renderElement: "p",
@@ -19,18 +23,15 @@ export const componentMappings = {
       type: "file"
     },
     children: null,
-    // TODO - qo'shimcha backendga valuesini yuboramiz
-    //  keyin get qilganda shu malumot objni render qilamiz
-    //  render element haqiqiy korinishi productionda
     renderElement: "img",
   },
   Line: {
-    type: "hr",
+    type: "div",
     props: {
       className: "post-build-item__hr"
     },
     children: null,
-    renderElement: "hr"
+    renderElement: "div"
   },
   Heading: {
     type: "textarea",
@@ -48,19 +49,38 @@ const WriteItem = (
     removeItem,
     currentDrag,
     setCurrentDrag,
-    changeOrder,
-    register
+    changeOrder
   }
 ) => {
-  const Component = createReactElement(jsxObj);
   const [isOver, setIsOver] = useState(false);
   const dragClassName = currentDrag && (currentDrag.id === jsxObj.id ? "post-build-item--dragging" : "post-build-item--dropping")
+  const isMainItem = jsxObj.mainTitle || jsxObj.mainText;
 
-  const onDragStart = () => {
+  let Component;
+  switch (jsxObj.type) {
+    case "textarea": {
+      Component = TextInput;
+      break;
+    }
+    case "input": {
+      Component = Image;
+      break;
+    }
+    case "div": {
+      Component = Line;
+      break;
+    }
+    default: {
+      Component = null;
+    }
+  }
+
+
+  function onDragStart() {
     setCurrentDrag(jsxObj);
   }
 
-  const onDragEnd = () => {
+  function onDragEnd() {
     setCurrentDrag(null);
   }
 
@@ -82,33 +102,37 @@ const WriteItem = (
     }
   }
 
+
   return (
     <div
       className={`post-build-item ${dragClassName}`}
     >
       <div className="post-build-item__component-wrapper">
-        {Component}
+        <Component jsxObj={jsxObj}/>
       </div>
-      <div className="post-build-item__actions-wrapper">
-        <div
-          onDragStart={(e) => onDragStart(e)}
-          onDragLeave={(e) => onDragLeave(e)}
-          onDragEnd={onDragEnd}
-          onDragOver={(e) => onDragOver(e)}
-          draggable={true}
-        >
-          <DragSvg
-            className="post-build-item__drag-svg"
+
+      {!isMainItem &&
+        (<div className="post-build-item__actions-wrapper">
+          <div
+            onDragStart={(e) => onDragStart(e)}
+            onDragLeave={(e) => onDragLeave(e)}
+            onDragEnd={onDragEnd}
+            onDragOver={(e) => onDragOver(e)}
+            draggable={true}
+          >
+            <DragSvg
+              className="post-build-item__drag-svg"
+            />
+          </div>
+          <DeleteSvg
+            onClick={() => removeItem(jsxObj.id)}
+            className="post-build-item__delete-svg"
           />
-        </div>
-        <DeleteSvg
-          onClick={() => removeItem(jsxObj.id)}
-          className="post-build-item__delete-svg"
-        />
-      </div>
+        </div>)
+      }
 
-
-      {!!currentDrag && (
+      {/* ------ DRAG BOX CHIZISH UCHUN KERAK ----------- */}
+      {!!currentDrag && !isMainItem && (
         (currentDrag.id !== jsxObj.id) && <div
           onDragStart={(e) => onDragStart(e)}
           onDragLeave={(e) => onDragLeave(e)}

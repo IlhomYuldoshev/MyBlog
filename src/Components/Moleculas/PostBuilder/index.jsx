@@ -7,7 +7,6 @@ import {v4} from "uuid";
 // TODO - KODNI REFACTOR QILISH KERAK!!!
 
 const PostBuilder = () => {
-  const {register, formState: {errors}, handleSubmit, control} = useForm();
   const [currentDrag, setCurrentDrag] = useState(null);
   const [items, setItems] = useState([]);
 
@@ -32,36 +31,51 @@ const PostBuilder = () => {
   }
 
   useEffect(() => {
-    const id = v4();
-    setItems(p => [...p, {
-      type: "textarea",
-      props: {
-        className: "base-input post-build-item__textarea",
-        ...register(
-          id.toString(),
-          {
-            required: true
-          }
-        )
+    const idTitle = v4();
+    const idText = v4();
+    setItems(p => [
+      ...p,
+      {
+        type: "textarea",
+        props: {
+          className: "base-input post-build-item__main-title",
+          form: "post-builder-form",
+          name: idTitle
+        },
+        children: null,
+        id: idTitle,
+        mainTitle: true
       },
-      children: null,
-      id
-    }])
+      {
+        type: "textarea",
+        props: {
+          className: "base-input post-build-item__main-text",
+          form: "post-builder-form",
+          name: idText
+        },
+        children: null,
+        id: idText,
+        mainText: true
+      }
+    ])
   }, [])
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    for (const [key, value] of formData.entries()) {
+      console.log(key, "===", value)
+    }
   }
 
   return (
     <div className="post-builder">
-      <form onSubmit={handleSubmit(onSubmit)} id="post-builder-form">
+      <form onSubmit={onSubmit} id="post-builder-form">
         {
           items.map((item) => (
             <WriteItem
               key={item.id}
               jsxObj={item}
-              register={register}
               removeItem={removeItem}
               currentDrag={currentDrag}
               setCurrentDrag={setCurrentDrag}
@@ -70,7 +84,10 @@ const PostBuilder = () => {
           ))
         }
       </form>
-      <WriteToolbar addItem={addItem} register={register}/>
+      <WriteToolbar
+        addItem={addItem}
+        formId={"post-builder-form"}
+      />
       <div style={{marginTop: 20}}>
         <button className="my-default-btn" type="submit" form="post-builder-form">
           Submit

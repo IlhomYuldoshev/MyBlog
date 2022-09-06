@@ -30,7 +30,9 @@ const MyModal = () => {
       break;
     }
     default: {
-      Component = <div/>
+      Component = function SimpleDiv() {
+        return <div/>
+      }
     }
   }
 
