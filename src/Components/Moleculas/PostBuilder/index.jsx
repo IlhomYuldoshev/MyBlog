@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import WriteItem from "./_components/Item";
 import WriteToolbar from "./_components/Toolbar";
-import {useForm} from "react-hook-form";
 import {v4} from "uuid";
-import axios from "axios";
 import PostProvider from "../../../Data/Providers/PostProvider";
 
 // TODO - KODNI REFACTOR QILISH KERAK!!!
@@ -80,7 +78,7 @@ const PostBuilder = () => {
       console.log("CATCH", err)
     })
   }
-
+  console.log(items)
   return (
     <div className="post-builder">
       <form onSubmit={onSubmit} id="post-builder-form">

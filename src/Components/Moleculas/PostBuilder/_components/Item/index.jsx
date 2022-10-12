@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {DeleteSvg, DragSvg} from "../../../../../Svgs";
 import TextInput from "./TextInput";
 import Line from "./Line";
@@ -104,7 +104,6 @@ const WriteItem = (
       changeOrder(currentDrag.id, jsxObj.id);
     }
   }
-
 
   return (
     <div

@@ -19,6 +19,9 @@ const TextInput = ({jsxObj}) => {
     }
   }, [textAreaHeight])
 
+  useEffect(() => {
+    ComponentRef.current?.focus()
+  }, [])
 
   // TODO - ref to'gri ishlayotganini tekshirish kerak
   const Component = createReactElement({

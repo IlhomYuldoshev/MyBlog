@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {createReactElement} from "../../index";
 
 const Image = ({jsxObj}) => {
@@ -31,6 +31,10 @@ const Image = ({jsxObj}) => {
       ref: ComponentRef
     }
   });
+
+  useEffect(() => {
+    handleUploadImage();
+  }, [])
 
   return (
     <>
