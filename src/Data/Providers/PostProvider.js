@@ -2,7 +2,7 @@ import client from "../../Services/http";
 
 export default class PostProvider {
   static async getAll () {
-    return client.get("/posts");
+    return await client.get("/posts");
   }
 
   static async getOne (postId) {

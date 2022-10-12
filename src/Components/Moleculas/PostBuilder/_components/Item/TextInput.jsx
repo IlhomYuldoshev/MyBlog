@@ -8,7 +8,6 @@ const TextInput = ({jsxObj}) => {
 
   function onChangeHandler(e) {
     if (ComponentRef.current) {
-      console.log(ComponentRef)
       setTextAreaHeight(ComponentRef.current?.scrollHeight);
     }
   }

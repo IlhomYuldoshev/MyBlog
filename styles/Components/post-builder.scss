@@ -127,7 +127,13 @@
   }
 
   &__img-input {
-
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
   }
 
   &__main-title {
@@ -174,6 +180,22 @@
 
     box-shadow: 50px 0 0 0 var(--secondary),
     -50px 0 0 0 var(--secondary);
+  }
+
+
+  &__image-input-actions {
+    margin-bottom: 12px;
+    div {
+      display: inline-block;
+    }
+    .dangerBtn {
+      background-color: red;
+      color: #fff;
+    }
+    .successBtn {
+      background-color: green;
+      color: #fff;
+    }
   }
 }
 

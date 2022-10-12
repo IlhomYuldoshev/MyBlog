@@ -12,6 +12,7 @@ export const componentMappings = {
     type: "textarea",
     props: {
       className: "base-input post-build-item__textarea",
+      required: true
     },
     children: null,
     renderElement: "p",
@@ -20,7 +21,8 @@ export const componentMappings = {
     type: "input",
     props: {
       className: "base-input post-build-item__img-input",
-      type: "file"
+      type: "file",
+      required: true
     },
     children: null,
     renderElement: "img",
@@ -36,7 +38,8 @@ export const componentMappings = {
   Heading: {
     type: "textarea",
     props: {
-      className: "base-input post-build-item__title"
+      className: "base-input post-build-item__title",
+      required: true
     },
     children: null,
     renderElement: "h2",

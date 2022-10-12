@@ -3,6 +3,8 @@ import WriteItem from "./_components/Item";
 import WriteToolbar from "./_components/Toolbar";
 import {useForm} from "react-hook-form";
 import {v4} from "uuid";
+import axios from "axios";
+import PostProvider from "../../../Data/Providers/PostProvider";
 
 // TODO - KODNI REFACTOR QILISH KERAK!!!
 
@@ -33,6 +35,7 @@ const PostBuilder = () => {
   useEffect(() => {
     const idTitle = v4();
     const idText = v4();
+    if(items.length) return;
     setItems(p => [
       ...p,
       {
@@ -40,7 +43,9 @@ const PostBuilder = () => {
         props: {
           className: "base-input post-build-item__main-title",
           form: "post-builder-form",
-          name: idTitle
+          name: idTitle,
+          required: true,
+          minLength: 4
         },
         children: null,
         id: idTitle,
@@ -51,7 +56,9 @@ const PostBuilder = () => {
         props: {
           className: "base-input post-build-item__main-text",
           form: "post-builder-form",
-          name: idText
+          name: idText,
+          required: true,
+          minLength: 30
         },
         children: null,
         id: idText,
@@ -62,10 +69,16 @@ const PostBuilder = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    for (const [key, value] of formData.entries()) {
-      console.log(key, "===", value)
-    }
+    const formValues = new FormData(e.target);
+    const lastItems = [...items];
+
+    const formData = getFormValues(formValues, lastItems);
+
+    PostProvider.createPost(formData).then(res => {
+      console.log("RES", res);
+    }).catch(err => {
+      console.log("CATCH", err)
+    })
   }
 
   return (
@@ -113,4 +126,26 @@ export function createReactElement(obj) {
   // } else {
   //   return React.createElement(obj.type, {...obj.props }, children);
   // }
+}
+
+function getFormValues (formValues, lastItems) {
+  const formData = new FormData();
+
+  for (const [id, value] of formValues.entries()) {
+    const curElement = lastItems.find(el => el.id === id);
+    if(curElement.mainTitle) {
+      formData.append("title", value);
+    }
+    if(curElement.mainText) {
+      formData.append("text", value);
+    }
+    if(curElement.renderElement === "img") {
+      formData.append("pictures", value)
+      continue;
+    }
+    curElement.value = value;
+  }
+  formData.append("body", JSON.stringify(lastItems));
+
+  return formData;
 }

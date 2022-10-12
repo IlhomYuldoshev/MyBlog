@@ -1,23 +1,30 @@
-import '../styles/index.scss'
-import {ModalProvider} from "../src/Context/ModalContext";
+import "../styles/index.scss";
+import { useState } from "react";
+import { ModalProvider } from "../src/Context/ModalContext";
 import MyModal from "../src/Components/Moleculas/Modal";
-import QueryProvider from "../src/Query";
-import {AuthProvider} from "../src/Context/AuthContext";
-import {GlobalContextProvider} from "../src/Context/GlobalContext";
+import { QueryClientProvider, Hydrate, QueryClient } from "@tanstack/react-query";
+import { AuthProvider } from "../src/Context/AuthContext";
+import { GlobalContextProvider } from "../src/Context/GlobalContext";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-function MyApp({Component, pageProps}) {
+function MyApp({ Component, pageProps }) {
+  const [queryClient] = useState(() => new QueryClient());
+  console.log("UNDEFINED", pageProps);
   return (
-    <QueryProvider>
-      <GlobalContextProvider>
-        <AuthProvider>
-          <ModalProvider>
-            <Component {...pageProps} />
-            <MyModal/>
-          </ModalProvider>
-        </AuthProvider>
-      </GlobalContextProvider>
-    </QueryProvider>
-  )
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <GlobalContextProvider>
+          <AuthProvider>
+            <ModalProvider>
+              <Component {...pageProps} />
+              <MyModal />
+            </ModalProvider>
+          </AuthProvider>
+        </GlobalContextProvider>
+      </Hydrate>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
