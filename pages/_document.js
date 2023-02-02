@@ -32,7 +32,7 @@ export default function Document() {
           />
         <noscript>
             <div>
-                <img src="https://mc.yandex.ru/watch/92299612" style="position:absolute; left:-9999px;" alt="" />
+                <img src="https://mc.yandex.ru/watch/92299612" style={{position: 'absolute', left: '-9999px'}} alt="" />
             </div>
         </noscript>
 
