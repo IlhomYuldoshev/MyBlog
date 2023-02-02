@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export const API_URL = "http://localhost:1202/api"
+// export const API_URL = "http://localhost:1202/api";
+export const API_URL = "myblogbackend-production.up.railway.app/api";
 
 const client = axios.create({
   baseURL: API_URL,
